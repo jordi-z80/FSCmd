@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FSCmd", "FSCmd.csproj", "{7E272F72-866F-4358-A7AA-4DD2C02B85BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E272F72-866F-4358-A7AA-4DD2C02B85BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E272F72-866F-4358-A7AA-4DD2C02B85BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E272F72-866F-4358-A7AA-4DD2C02B85BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E272F72-866F-4358-A7AA-4DD2C02B85BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {057C7296-3256-4821-B08B-D47A161E6E98}
+	EndGlobalSection
+EndGlobal
