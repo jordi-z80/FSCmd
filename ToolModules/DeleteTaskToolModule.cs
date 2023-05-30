@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace FSCmd;
 
 internal class DeleteTaskToolModule : IToolModule
 {
-	public string Name => "deleteTask";
+	public string[] Name => new[] { "deleteTask" };
 	public string SingleLineHelp => "deletes task from the task scheduler";
 	public string MultiLineHelp => @"deleteTask
 	--taskName=""taskName""           ; Name of the task to be deleted from the task scheduler
@@ -18,8 +19,10 @@ internal class DeleteTaskToolModule : IToolModule
 
 	//=============================================================================
 	/// <summary></summary>
-	public bool Run ()
+	public bool Run (string action)
 	{
+		Debug.Assert (action == Name[0]);
+
 		string taskName = Program.Configuration["taskName"];
 		if (taskName == null) { Console.WriteLine ("Invalid task name."); return false; }
 

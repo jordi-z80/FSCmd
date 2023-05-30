@@ -19,6 +19,11 @@
 		{
 			"commandName": "Project",
 			"commandLineArgs": "deleteTask --taskName=\"FSCmdAlarmToolModule_80836042-55b7-4fb9-8575-9cde87d59a23\""
+		},
+		"hibernate":
+		{
+			"commandName": "Project",
+			"commandLineArgs": "power --hibernate"
 		}
 	}
 }

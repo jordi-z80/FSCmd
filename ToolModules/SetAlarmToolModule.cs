@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Win32.TaskScheduler;
@@ -11,7 +11,7 @@ namespace FSCmd;
 
 internal class SetAlarmToolModule : IToolModule
 {
-	public string Name => "setAlarm";
+	public string[] Name => new[] { "setAlarm" };
 	public string SingleLineHelp => "Sets an alarm.";
 	public string MultiLineHelp => @"setAlarm
 	set_alarm --text=""Reason""       ; Text to display on the alert
@@ -22,8 +22,10 @@ internal class SetAlarmToolModule : IToolModule
 
 	//=============================================================================
 	/// <summary></summary>
-	public bool Run ()
+	public bool Run (string action)
 	{
+		Debug.Assert (action == Name[0]);
+
 		string reason = Configuration["text"];
 		string deltaTime = Configuration["deltaTime"];
 		string audioFile = Configuration["audioFile"];

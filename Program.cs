@@ -35,9 +35,9 @@ internal class Program
 		// check all tools, run the one specified
 		foreach (var tool in toolModules)
 		{
-			if (tool.Name == toolName)
+			if (tool.Name.Contains (toolName))
 			{
-				if (!tool.Run ())
+				if (!tool.Run (toolName))
 				{
 					showHelp (tool);
 					return -1;
