@@ -11,8 +11,7 @@ namespace FSCmd;
 
 internal class AlertToolModule : IToolModule
 {
-	public string[] Name => new[] { "alert" };
-	public string SingleLineHelp => "Displays an alert on the screen.";
+	public ToolModuleInfo[] Info => new ToolModuleInfo[] { new ("alert", "Displays an alert on the screen.") };
 
 	public string MultiLineHelp => @"alert 
 	--text=""Text""                   ; Text to display
@@ -20,11 +19,12 @@ internal class AlertToolModule : IToolModule
 
 
 
+
 	//=============================================================================
 	/// <summary></summary>
 	public bool Run (string action)
 	{
-		Debug.Assert (action == Name[0]);
+		Debug.Assert (action == Info[0].Name);
 
 		ApplicationConfiguration.Initialize ();
 

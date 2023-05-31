@@ -11,8 +11,7 @@ namespace FSCmd;
 
 internal class SetAlarmToolModule : IToolModule
 {
-	public string[] Name => new[] { "setAlarm" };
-	public string SingleLineHelp => "Sets an alarm.";
+	public ToolModuleInfo[] Info => new ToolModuleInfo[] { new ("setAlarm", "Sets an alarm.") };
 	public string MultiLineHelp => @"setAlarm
 	set_alarm --text=""Reason""       ; Text to display on the alert
 	--deltaTime=[hh:]mm[:ss]          ; Time to wait before the alarm is triggered
@@ -20,11 +19,12 @@ internal class SetAlarmToolModule : IToolModule
 ";
 	IConfigurationRoot Configuration => Program.Configuration;
 
+
 	//=============================================================================
 	/// <summary></summary>
 	public bool Run (string action)
 	{
-		Debug.Assert (action == Name[0]);
+		Debug.Assert (action == Info[0].Name);
 
 		string reason = Configuration["text"];
 		string deltaTime = Configuration["deltaTime"];

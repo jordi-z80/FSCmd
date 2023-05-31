@@ -8,9 +8,9 @@ namespace FSCmd;
 
 internal class PowerControlToolModule : IToolModule
 {
-	public string[] Name => new[] { "hibernate", "sleep"  };
-	public string SingleLineHelp => "Allows hibernation, sleep.";
 	public string MultiLineHelp => @"hibernate, suspend";
+
+	public ToolModuleInfo[] Info => new ToolModuleInfo[] { new ("hibernate","Allows hibernation."), new ("sleep", "Allows sleep.") };
 
 	public bool Run (string action)
 	{

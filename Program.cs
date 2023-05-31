@@ -35,7 +35,8 @@ internal class Program
 		// check all tools, run the one specified
 		foreach (var tool in toolModules)
 		{
-			if (tool.Name.Contains (toolName))
+			var toolNames = tool.Info.Select (s => s.Name);
+			if (toolNames.Contains (toolName))
 			{
 				if (!tool.Run (toolName))
 				{
@@ -74,11 +75,14 @@ internal class Program
 		Console.WriteLine ("Available tools: ");
 		foreach (var tool in toolModules)
 		{
-			string str = $"\tFSCmd {tool.Name} ";
-			while (str.Length < 30) str += " ";
-			str+= $"{tool.SingleLineHelp}";
+			foreach (var info in tool.Info)
+			{
+				string str = $"\tFSCmd {info.Name} ";
+				while (str.Length < 30) str += " ";
+				str += $"{info.SingleLineHelp}";
 
-			Console.WriteLine (str);
+				Console.WriteLine (str);
+			}
 		}
 	}
 

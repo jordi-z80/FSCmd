@@ -10,18 +10,18 @@ namespace FSCmd;
 
 internal class DeleteTaskToolModule : IToolModule
 {
-	public string[] Name => new[] { "deleteTask" };
-	public string SingleLineHelp => "deletes task from the task scheduler";
+	public ToolModuleInfo[] Info => new ToolModuleInfo[] { new ("deleteTask", "Deletes task from the task scheduler.") };
 	public string MultiLineHelp => @"deleteTask
 	--taskName=""taskName""           ; Name of the task to be deleted from the task scheduler
 
 ";
 
+
 	//=============================================================================
 	/// <summary></summary>
 	public bool Run (string action)
 	{
-		Debug.Assert (action == Name[0]);
+		Debug.Assert (action == Info[0].Name);
 
 		string taskName = Program.Configuration["taskName"];
 		if (taskName == null) { Console.WriteLine ("Invalid task name."); return false; }
