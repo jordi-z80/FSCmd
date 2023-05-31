@@ -11,12 +11,15 @@ namespace FSCmd;
 
 internal class SetAlarmToolModule : IToolModule
 {
-	public ToolModuleInfo[] Info => new ToolModuleInfo[] { new ("setAlarm", "Sets an alarm.") };
-	public string MultiLineHelp => @"setAlarm
-	set_alarm --text=""Reason""       ; Text to display on the alert
-	--deltaTime=[hh:]mm[:ss]          ; Time to wait before the alarm is triggered
-	[--audioFile=""Path to audio file""
-";
+	public ToolModuleInfo[] Info => new ToolModuleInfo[] 
+	{ 
+		new ("setAlarm", "Sets an alarm.", new List<ToolParameterInfo>()
+		{
+			new ("--text","Alarm text","Optional text to display on the alert."),
+			new ("--deltaTime","[hh:]mm[:ss]","Time to wait before the alarm is triggered."),
+			new ("--audioFile","Path to audio file","Optional audio file to play as alarm.")
+		}) 
+	};
 	IConfigurationRoot Configuration => Program.Configuration;
 
 

@@ -10,11 +10,14 @@ namespace FSCmd;
 
 internal class DeleteTaskToolModule : IToolModule
 {
-	public ToolModuleInfo[] Info => new ToolModuleInfo[] { new ("deleteTask", "Deletes task from the task scheduler.") };
-	public string MultiLineHelp => @"deleteTask
-	--taskName=""taskName""           ; Name of the task to be deleted from the task scheduler
+	public ToolModuleInfo[] Info => new ToolModuleInfo[] 
+	{ 
+		new ("deleteTask", "Deletes task from the task scheduler.", new List < ToolParameterInfo >()
+		{
+			new ("--taskName","taskName", "Name of the task to be deleted from the task scheduler")
 
-";
+		}) 
+	};
 
 
 	//=============================================================================

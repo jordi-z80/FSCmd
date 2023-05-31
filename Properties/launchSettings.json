@@ -1,29 +1,27 @@
 {
-	"profiles":
-	{
-		"FSCmd":
-		{
-			"commandName": "Project"
-		},
-		"set_alarm":
-		{
-			"commandName": "Project",
-			"commandLineArgs": "setAlarm --text=\"Para els tallarines\" --deltaTime=2"
-		},
-		"alert":
-		{
-			"commandName": "Project",
-			"commandLineArgs": "alert --text=\"This is the text\" --audioFile=\"c:\\bats\\playthissong.wav\""
-		},
-		"delete_task":
-		{
-			"commandName": "Project",
-			"commandLineArgs": "deleteTask --taskName=\"FSCmdAlarmToolModule_80836042-55b7-4fb9-8575-9cde87d59a23\""
-		},
-		"hibernate":
-		{
-			"commandName": "Project",
-			"commandLineArgs": "power --hibernate"
-		}
-	}
+  "profiles": {
+    "FSCmd": {
+      "commandName": "Project"
+    },
+    "set_alarm": {
+      "commandName": "Project",
+      "commandLineArgs": "setAlarm --text=\"Para els tallarines\" --deltaTime=2"
+    },
+    "alert": {
+      "commandName": "Project",
+      "commandLineArgs": "alert --text=\"This is the text\" --audioFile=\"c:\\bats\\playthissong.wav\""
+    },
+    "delete_task": {
+      "commandName": "Project",
+      "commandLineArgs": "deleteTask --taskName=\"FSCmdAlarmToolModule_80836042-55b7-4fb9-8575-9cde87d59a23\""
+    },
+    "hibernate": {
+      "commandName": "Project",
+      "commandLineArgs": "hibernate"
+    },
+    "help": {
+      "commandName": "Project",
+      "commandLineArgs": "help setAlarm"
+    }
+  }
 }

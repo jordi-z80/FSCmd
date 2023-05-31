@@ -9,7 +9,6 @@ namespace FSCmd;
 internal interface IToolModule
 {
 	ToolModuleInfo[] Info { get; }
-	string MultiLineHelp { get; }
 
 	bool Run (string action);						// show return false if the help should be shown, true otherwise
 }

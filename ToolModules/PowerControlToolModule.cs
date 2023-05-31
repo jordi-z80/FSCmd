@@ -10,7 +10,11 @@ internal class PowerControlToolModule : IToolModule
 {
 	public string MultiLineHelp => @"hibernate, suspend";
 
-	public ToolModuleInfo[] Info => new ToolModuleInfo[] { new ("hibernate","Allows hibernation."), new ("sleep", "Allows sleep.") };
+	public ToolModuleInfo[] Info => new ToolModuleInfo[]
+	{
+		new ("hibernate","Puts the computer into hibernation.", new List <ToolParameterInfo>() { }),
+		new ("sleep", "Puts the computer into sleep.", new List <ToolParameterInfo>()),
+	};
 
 	public bool Run (string action)
 	{

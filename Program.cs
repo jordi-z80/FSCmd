@@ -5,7 +5,7 @@ namespace FSCmd;
 
 
 
-internal class Program
+internal static class Program
 {
 	public static IConfigurationRoot Configuration { get; private set; }
 
@@ -27,32 +27,58 @@ internal class Program
 		// the first argument must be the tool name
 		string toolName = args[0];
 
+		// special case: help
+		if (toolName == "help")
+		{
+			if (args.Length > 1)
+			{
+				// particular help
+				toolName = args[1];
+				showHelp (toolModules, toolName);
+			}
+			else
+			{
+				showHelp (toolModules);
+			}
+			return -1;
+		}
+
 		// create configuration
 		var builder = new ConfigurationBuilder ();
 		builder.AddCommandLine (args);
 		Configuration = builder.Build ();
 
-		// check all tools, run the one specified
+		// find the tool
+		var tool = getToolByName (toolModules, toolName);
+
+		// tool not found
+		if (tool == null)
+		{
+			Console.WriteLine ($"Tool '{toolName}' not found.");
+			showHelp (toolModules);
+			return -1;
+		}
+
+		// run the tool
+		if (!tool.Run (toolName))
+		{
+			showHelp (toolModules, toolName);
+			return -1;
+		}
+		return 0;
+	}
+
+	//=============================================================================
+	/// <summary></summary>
+	static IToolModule getToolByName (List<IToolModule> toolModules, string name)
+	{
 		foreach (var tool in toolModules)
 		{
 			var toolNames = tool.Info.Select (s => s.Name);
-			if (toolNames.Contains (toolName))
-			{
-				if (!tool.Run (toolName))
-				{
-					showHelp (tool);
-					return -1;
-				}
-
-				// valid execution
-				return 0;
-			}
+			if (toolNames.Contains (name)) return tool;
 		}
 
-		// no tool found, show help
-		showHelp (toolModules);
-		return -1;
-
+		return null;
 	}
 
 	//=============================================================================
@@ -73,6 +99,7 @@ internal class Program
 	{
 		Console.WriteLine ("Usage: FSCmd <tool> [tool options]");
 		Console.WriteLine ("Available tools: ");
+		Console.WriteLine ("\tFSCmd help [tool]");
 		foreach (var tool in toolModules)
 		{
 			foreach (var info in tool.Info)
@@ -88,8 +115,32 @@ internal class Program
 
 	//=============================================================================
 	/// <summary></summary>
-	private static void showHelp (IToolModule tool)
+	private static void showHelp (List<IToolModule> toolModules, string toolName)
 	{
-		Console.WriteLine ("Usage: FSCmd " + tool.MultiLineHelp);
+		var tool = getToolByName (toolModules, toolName);
+		if (tool == null) return;
+
+		var info = tool.Info.FirstOrDefault (p => p.Name == toolName);
+
+		Console.WriteLine ($"FSCmd {info.Name} : {info.SingleLineHelp}\n");
+
+		if (info.Parameters.Count <= 0)
+		{
+			Console.WriteLine ($"Usage: FSCmd {toolName} [no parameters]");
+			return;
+		}
+
+		Console.WriteLine ($"Usage: FSCmd {toolName} [tool options]");
+
+
+		foreach (var parm in info.Parameters)
+		{
+			string str= $"   {parm.ParameterName}";
+			str += $"=\"{parm.ParameterValueDescription}\"";
+
+			while (str.Length < 48) str += " ";
+			str += $"{parm.ParameterHelp}";
+			Console.WriteLine (str);
+		}
 	}
 }

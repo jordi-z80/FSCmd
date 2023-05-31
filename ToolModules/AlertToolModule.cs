@@ -11,13 +11,15 @@ namespace FSCmd;
 
 internal class AlertToolModule : IToolModule
 {
-	public ToolModuleInfo[] Info => new ToolModuleInfo[] { new ("alert", "Displays an alert on the screen.") };
+	public ToolModuleInfo[] Info => new ToolModuleInfo[] 
+	{ 
+		new ("alert", "Displays an alert on the screen.",new List<ToolParameterInfo>()
+		{
+			new ("--text","Text to display", "Optional text to display in the alert."),
+			new ("--audioFile","Path to audio file", "Optional file to play when the alert is displayed.")
 
-	public string MultiLineHelp => @"alert 
-	--text=""Text""                   ; Text to display
-	--audioFile=""audioFile""         ; Path to audio file to play";
-
-
+		}) 
+	};
 
 
 	//=============================================================================
