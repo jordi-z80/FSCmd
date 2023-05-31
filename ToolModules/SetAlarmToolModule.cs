@@ -92,7 +92,7 @@ internal class SetAlarmToolModule : IToolModule
 			// Register the task in the root folder
 			ts.RootFolder.RegisterTaskDefinition (uniqueTaskName, td);
 
-			Console.Write ($"Alarm set as a Task '{uniqueTaskName}' at {alarmTime.ToLongTimeString ()}");
+			Console.WriteLine ($"Alarm set as a Task '{uniqueTaskName}' at {alarmTime.ToLongTimeString ()}");
 		}
 
 	}

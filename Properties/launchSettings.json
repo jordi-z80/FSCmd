@@ -22,6 +22,10 @@
     "help": {
       "commandName": "Project",
       "commandLineArgs": "help setAlarm"
+    },
+    "vlc": {
+      "commandName": "Project",
+      "commandLineArgs": "vlcPlay"
     }
   }
 }
