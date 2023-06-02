@@ -11,7 +11,7 @@ internal class VolumeToolVolume : IToolModule
 {
 	public ToolModuleInfo[] Info => new ToolModuleInfo[]
 {
-		new ("globalVolume", "Changes the global volume of the current device.",new List<ToolParameterInfo>()
+		new ("volume", "Changes the volume of the current device.",new List<ToolParameterInfo>()
 		{
 			new ("--set","[0..100]", "Volume value, in percentage."),
 			new ("--relativeSet","[percentage]", "Volume change, relative. e.g. 50% = half volume, 200% = double.")

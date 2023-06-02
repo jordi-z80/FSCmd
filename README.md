@@ -1,9 +1,11 @@
 # FSCmd
 
-FSCmd  is a compact command-line tool, created with inspiration from utilities like nircmd. 
+FSCmd is a compact command-line tool, created with inspiration from utilities like nircmd. 
 Its primary function is to streamline dependencies within a range of software projects.
 
 It has been designed with a modular structure, enabling the addition of independent modules over time to address evolving user needs and expand functionality.
+
+This description sounds incredibly professional but don't be fooled: ChatGPT wrote it. :)
 
 # Functions
 
@@ -22,6 +24,6 @@ Available tools:
         FSCmd vlcPlay                Plays VLC video.
         FSCmd vlcNext                Skips to the next VLC video.
         FSCmd vlcPrevious            Goes back to the previous VLC video.
-        FSCmd globalVolume           Changes the global volume of the current device.
+        FSCmd volume		         Changes the volume of the current device.
 ```
 
