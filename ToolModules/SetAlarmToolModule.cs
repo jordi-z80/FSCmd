@@ -16,7 +16,8 @@ internal class SetAlarmToolModule : IToolModule
 		new ("setAlarm", "Sets an alarm.", new List<ToolParameterInfo>()
 		{
 			new ("--text","Alarm text","Optional text to display on the alert."),
-			new ("--deltaTime","[hh:]mm[:ss]","Time to wait before the alarm is triggered."),
+			new ("--deltaTime","[HH:]mm[:SS]","Time to wait before the alarm is triggered."),
+			new ("--date","YYYY/MM/DD HH:mm:SS","Set an alarm for a specified date."),
 			new ("--audioFile","Path to audio file","Optional audio file to play as alarm.")
 		}) 
 	};
@@ -32,22 +33,60 @@ internal class SetAlarmToolModule : IToolModule
 		string reason = Configuration["text"];
 		string deltaTime = Configuration["deltaTime"];
 		string audioFile = Configuration["audioFile"];
+		string date = Configuration["date"];
 
-		if (deltaTime == null) { Console.WriteLine ("Missing parameters."); return false; }
+		deltaTime = null;
+		date = "02 19:44";
 
-		var ts = getTimeFromString (deltaTime);
-		if (!ts.HasValue) { Console.WriteLine ("The deltaTime does not match the pattern."); return false; }
+		if (deltaTime == null && date == null) { Console.WriteLine ("Missing parameters."); return false; }
+		if (deltaTime != null)
+		{
+			var ts = getDeltaTimeFromString (deltaTime);
+			if (!ts.HasValue) { Console.WriteLine ("The deltaTime does not match the pattern."); return false; }
 
-		DateTime targetTime = DateTime.Now + ts.Value;
+			DateTime targetTime = DateTime.Now + ts.Value;
 
-		CreateTaskToRunFile (reason,targetTime,audioFile);
+			CreateTaskToRunFile (reason, targetTime, audioFile);
+		}
+		else if (date != null)
+		{
+			var dt = getTimestampFromString (date);
+			if (!dt.HasValue) { Console.WriteLine ("The date does not match the pattern."); return false; }
+
+			CreateTaskToRunFile (reason, dt.Value, audioFile);
+		}
 
 		return true;
 	}
 
 	//=============================================================================
 	/// <summary></summary>
-	TimeSpan? getTimeFromString (string str)
+	private DateTime? getTimestampFromString (string date)
+	{
+		string pattern = @"((?<Year>\d{4})/)?((?<Month>\d{2})/)?(?<Day>\d{2})(\s(?<Hour>\d{2}):(?<Minute>\d{2})(:(?<Second>\d{2}))?)?";
+
+		var match = Regex.Match (date, pattern);
+		if (!match.Success) return null;
+
+		int year = getGroup ("Year", DateTime.Now.Year);
+		int month = getGroup ("Month", DateTime.Now.Month);
+		int day = getGroup ("Day", DateTime.Now.Day);
+		int hour = getGroup ("Hour", 0);
+		int minute = getGroup ("Minute", 0);
+		int second = getGroup ("Second", 0);
+
+		return new DateTime (year, month, day, hour, minute, second);
+
+		int getGroup (string grp, int def=0)
+		{
+			if (match.Groups[grp].Success) return int.Parse (match.Groups[grp].Value);
+			return def;
+		}
+	}
+
+	//=============================================================================
+	/// <summary></summary>
+	TimeSpan? getDeltaTimeFromString (string str)
 	{
 
 		string regEx = @"^(?:(?<hours>\d+):)?(?<minutes>\d+)(:(?<seconds>\d+))?$";
