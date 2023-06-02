@@ -18,7 +18,10 @@ Available tools:
         FSCmd hibernate              Puts the computer into hibernation.
         FSCmd sleep                  Puts the computer into sleep.
         FSCmd setAlarm               Sets an alarm.
+        FSCmd vlcPause               Pauses VLC video.
+        FSCmd vlcPlay                Plays VLC video.
+        FSCmd vlcNext                Skips to the next VLC video.
+        FSCmd vlcPrevious            Goes back to the previous VLC video.
+        FSCmd globalVolume           Changes the global volume of the current device.
 ```
 
-# Help export
-FSCmd will incorporate a Help Export feature. This allows users to export the help texts for each command, offering potential for use as embeddings in AI applications (actually, this and dependency reduction is the main reason for this project)

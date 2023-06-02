@@ -26,6 +26,10 @@
     "vlc": {
       "commandName": "Project",
       "commandLineArgs": "vlcPlay"
+    },
+    "volume": {
+      "commandName": "Project",
+      "commandLineArgs": "globalVolume --relativeSet=25"
     }
   }
 }
