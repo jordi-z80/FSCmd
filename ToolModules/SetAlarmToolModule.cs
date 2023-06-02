@@ -35,9 +35,6 @@ internal class SetAlarmToolModule : IToolModule
 		string audioFile = Configuration["audioFile"];
 		string date = Configuration["date"];
 
-		deltaTime = null;
-		date = "02 19:44";
-
 		if (deltaTime == null && date == null) { Console.WriteLine ("Missing parameters."); return false; }
 		if (deltaTime != null)
 		{
