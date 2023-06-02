@@ -25,7 +25,7 @@
     },
     "vlc": {
       "commandName": "Project",
-      "commandLineArgs": "vlcPlay"
+      "commandLineArgs": "vlcPause"
     },
     "volume": {
       "commandName": "Project",

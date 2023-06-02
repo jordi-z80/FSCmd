@@ -46,6 +46,7 @@ internal static class Program
 		// create configuration
 		var builder = new ConfigurationBuilder ();
 		builder.AddCommandLine (args);
+		builder.AddEnvironmentVariables ();
 		Configuration = builder.Build ();
 
 		// find the tool

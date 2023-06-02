@@ -13,23 +13,30 @@ internal class VLCToolModule : IToolModule
 	{
 		new ("vlcPause", "Pauses VLC video.", new List < ToolParameterInfo >()
 		{
+			new ToolParameterInfo("--VLC_PORT","VLC HTTP port","Optional, defaults to 8080."),
+			new ToolParameterInfo("--VLC_PASSWORD","Password","Optional, defaults to 'vlcremote'.")
 		}),
 		new ("vlcPlay", "Plays VLC video.", new List < ToolParameterInfo >()
 		{
+			new ToolParameterInfo("--VLC_PORT","VLC HTTP port","Optional, defaults to 8080."),
+			new ToolParameterInfo("--VLC_PASSWORD","Password","Optional, defaults to 'vlcremote'.")
 		}),
 		new ("vlcNext", "Skips to the next VLC video.", new List < ToolParameterInfo >()
 		{
+			new ToolParameterInfo("--VLC_PORT","VLC HTTP port","Optional, defaults to 8080."),
+			new ToolParameterInfo("--VLC_PASSWORD","Password","Optional, defaults to 'vlcremote'.")
 		}),
 		new ("vlcPrevious", "Goes back to the previous VLC video.", new List < ToolParameterInfo >()
 		{
+			new ToolParameterInfo("--VLC_PORT","VLC HTTP port","Optional, defaults to 8080."),
+			new ToolParameterInfo("--VLC_PASSWORD","Password","Optional, defaults to 'vlcremote'.")
 		}),
 
 	};
 
-	// for the moment those values are hardcoded. (I have to implement common parameters for all the ToolModuleInfo members.
 	const string Host = "localhost";
-	const int Port = 8080;
-	const string Password = "1234";
+	int Port = 8080;
+	string Password = "vlcremote";
 
 	
 
@@ -37,6 +44,8 @@ internal class VLCToolModule : IToolModule
 	/// <summary></summary>
 	public bool Run (string action)
 	{
+		setupParams ();
+
 		switch (action)
 		{
 			case "vlcNext": sendMessage ("command=pl_next").Wait (); break;
@@ -46,6 +55,23 @@ internal class VLCToolModule : IToolModule
 			default: return false;
 		}
 		return true;
+	}
+
+	//=============================================================================
+	/// <summary></summary>
+	private void setupParams ()
+	{
+		string sPort = Program.Configuration["VLC_PORT"];
+		if (sPort != null)
+		{
+			if (Int32.TryParse (sPort, out var port))
+			{
+				Port = port;
+			}
+		}
+
+		string sPassword = Program.Configuration["VLC_PASSWORD"];
+		if (sPassword != null) Password = sPassword;
 	}
 
 
