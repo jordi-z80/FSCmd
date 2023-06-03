@@ -24,7 +24,7 @@ Available tools:
         FSCmd vlcPlay                Plays VLC video.
         FSCmd vlcNext                Skips to the next VLC video.
         FSCmd vlcPrevious            Goes back to the previous VLC video.
-        FSCmd volume                 Changes the volume of the current device.
+        FSCmd volume                 Changes the volume of the current audio device.
 ```
 
 # Configuration
